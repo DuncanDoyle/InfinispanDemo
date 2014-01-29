@@ -1,0 +1,70 @@
+<!-- <infinispan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:infinispan:config:5.2 http://www.infinispan.org/schemas/infinispan-config-5.2.xsd"
+	xmlns="urn:infinispan:config:5.2">
+ -->
+ <infinispan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:infinispan:config:6.0 http://www.infinispan.org/schemas/infinispan-config-6.0.xsd"
+	xmlns="urn:infinispan:config:6.0">
+
+
+	<global>
+		<!-- <sites local="${jgroups.relay2.site:LON}"/> -->
+
+		<!-- <sites local="LON"/> -->
+		<!-- <transport clusterName="local-cluster" siteId="${site}"> -->
+		<globalJmxStatistics enabled="true" />
+		<transport clusterName="local-cluster" nodeName="${jboss.node.name}">
+			<properties>
+				<!-- <property name="configurationFile" value="infinispan/erdf-jdg-jgroups.xml"/> -->
+				<property name="configurationFile" value="ispn-jgroups-tcp.xml" />
+			</properties>
+		</transport>
+
+	</global>
+
+	<!-- Default Cache Configuration. -->
+	<!--  -->
+	<default>
+		<compatibility enabled="true"/>
+		<locking concurrencyLevel="100" lockAcquisitionTimeout="1000" />
+		<jmxStatistics enabled="true" />
+		<clustering mode="distribution">
+			<hash numOwners="2" />
+			<sync />
+		</clustering>
+	</default>
+
+	<!-- Named Cache Configuration. -->
+	<namedCache name="MyCoolCache">
+		<compatibility enabled="true"/>
+		<eviction maxEntries="100000" />
+		<clustering mode="distribution">
+			<hash numOwners="2" />
+			<sync />
+		</clustering>
+		<!-- 
+		<loaders passivation="false" preload="true" shared="true">
+			<stringKeyedJdbcStore xmlns="urn:infinispan:config:jdbc:5.2" fetchPersistentState="true" ignoreModifications="false"
+				purgeOnStartup="false">
+				<dataSource jndiUrl="java:jboss/datasources/JdgCacheStoreDS" />
+				<stringKeyedTable dropOnExit="false" createOnStart="true" prefix="ISPN_STRING_TABLE">
+					<idColumn name="ID_COLUMN" type="VARCHAR(255)" />
+		-->
+					<!-- PostgreSQL does not support the BINARY type, so using BYTEA. -->
+		<!-- 
+					<dataColumn name="DATA_COLUMN" type="BYTEA" />
+					<timestampColumn name="TIMESTAMP_COLUMN" type="BIGINT" />
+				</stringKeyedTable>
+			</stringKeyedJdbcStore>
+		</loaders>
+		 -->
+	</namedCache>
+	<!-- Named Cache Configuration. -->
+	<!-- 
+	<namedCache name="teams">
+		<clustering mode="distribution">
+			<hash numOwners="2" />
+			<sync />
+		</clustering>
+	</namedCache>
+	 -->
+
+</infinispan>
