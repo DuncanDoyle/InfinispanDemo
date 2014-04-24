@@ -6,11 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
-		
-		<infinispan.version>6.0.0.Final</infinispan.version>
-		<!-- 
-		 <infinispan.version>5.2.4.Final-redhat-1</infinispan.version>
-		  -->
+		<infinispan.version>6.0.2.Final</infinispan.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -62,9 +58,7 @@
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-server-hotrod</artifactId>
 			<version>${infinispan.version}</version>
-			 <!--
-			 <version>5.2.4.Final</version>
-			 -->
+			
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -72,9 +66,7 @@
 			<artifactId>infinispan-cachestore-jdbc</artifactId>
 			 
 			<version>${infinispan.version}</version>
-			<!--
-			 <version>5.2.4.Final</version>
-			 -->
+			
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -83,7 +75,7 @@
 			<version>1.7.5</version>
 			<scope>compile</scope>
 		</dependency>
-
+		
 		<!-- First declare the APIs we depend on and need for compilation. All of them are provided by JBoss AS 7 -->
 
 		<!-- Import the CDI API, we use provided scope as the API is included in JBoss AS 7 -->

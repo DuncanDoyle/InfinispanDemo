@@ -9,9 +9,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
+import org.infinispan.commons.util.Util;
 import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.manager.EmbeddedCacheManager;
-import org.infinispan.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
