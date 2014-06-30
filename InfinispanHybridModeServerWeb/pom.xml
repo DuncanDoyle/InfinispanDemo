@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jboss.ddoyle.osc2013.infinispan.demo</groupId>
 	<artifactId>InfinispanHybridModeServerWeb</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
-		<infinispan.version>6.0.2.Final</infinispan.version>
+		<infinispan.version>7.0.0-SNAPSHOT</infinispan.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -27,6 +27,16 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- To store RH Summit commands. -->
+		<!-- 
+		<dependency>
+			<groupId>org.jboss.ddoyle.rhsummit2014.hacepbrms</groupId>
+			<artifactId>RHSummitHaCepCommands</artifactId>
+			<version>1.0.0</version>
+			<scope>compile</scope>
+		</dependency>
+		 -->
+	
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-core</artifactId>
@@ -69,6 +79,14 @@
 			
 			<scope>compile</scope>
 		</dependency>
+		<!-- Explicitly use the Red Hat version of this JAR, the one from .org seems to give issues -->
+		<dependency>
+			<groupId>gnu-getopt</groupId>
+			<artifactId>getopt</artifactId>
+			<version>1.0.13-redhat-2</version>
+			<scope>compile</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
