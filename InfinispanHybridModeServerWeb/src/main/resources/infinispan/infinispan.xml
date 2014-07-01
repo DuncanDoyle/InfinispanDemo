@@ -1,74 +1,18 @@
-<!-- <infinispan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:infinispan:config:5.2 http://www.infinispan.org/schemas/infinispan-config-5.2.xsd"
-	xmlns="urn:infinispan:config:5.2">
- -->
- <infinispan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:infinispan:config:7.0 http://www.infinispan.org/schemas/infinispan-config-7.0.xsd"
+<infinispan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:infinispan:config:7.0 http://www.infinispan.org/schemas/infinispan-config-7.0.xsd"
 	xmlns="urn:infinispan:config:7.0">
 
 	<jgroups>
-		<stack-file name="external-file" path="ispn-jgroups-tcp.xml"/>
+		<stack-file name="external-file" path="ispn-jgroups-tcp.xml" />
 	</jgroups>
 
 	<cache-container default-cache="MyCoolCache">
-		<transport stack="external-file"/>
+		<transport stack="external-file" />
 		<serialization></serialization>
 		<jmx></jmx>
 		<distributed-cache name="MyCoolCache" owners="2" mode="SYNC">
-			<eviction max-entries="10000"/>
-			<compatibility/>
+			<eviction max-entries="10000" />
+			<!-- <compatibility/> -->
 		</distributed-cache>
 	</cache-container>
-		
-	
-	<!-- Default Cache Configuration. -->
-	<!-- 
-	<default>
-		<compatibility enabled="true"/>
-		<locking concurrencyLevel="100" lockAcquisitionTimeout="1000" />
-		<jmxStatistics enabled="true" />
-		<clustering mode="distribution">
-			<hash numOwners="2" />
-			<sync />
-		</clustering>
-	</default>
-	 -->
-
-	<!-- Named Cache Configuration. -->
-	<!-- 
-	<namedCache name="MyCoolCache">
-		<compatibility enabled="true"/>
-		<eviction maxEntries="100000" />
-		<clustering mode="distribution">
-			<hash numOwners="2" />
-			<sync />
-		</clustering>
-	 -->
-		<!-- 
-		<loaders passivation="false" preload="true" shared="true">
-			<stringKeyedJdbcStore xmlns="urn:infinispan:config:jdbc:5.2" fetchPersistentState="true" ignoreModifications="false"
-				purgeOnStartup="false">
-				<dataSource jndiUrl="java:jboss/datasources/JdgCacheStoreDS" />
-				<stringKeyedTable dropOnExit="false" createOnStart="true" prefix="ISPN_STRING_TABLE">
-					<idColumn name="ID_COLUMN" type="VARCHAR(255)" />
-		-->
-					<!-- PostgreSQL does not support the BINARY type, so using BYTEA. -->
-		<!-- 
-					<dataColumn name="DATA_COLUMN" type="BYTEA" />
-					<timestampColumn name="TIMESTAMP_COLUMN" type="BIGINT" />
-				</stringKeyedTable>
-			</stringKeyedJdbcStore>
-		</loaders>
-		 -->
-	<!-- 
-	</namedCache>
-	 -->
-	<!-- Named Cache Configuration. -->
-	<!-- 
-	<namedCache name="teams">
-		<clustering mode="distribution">
-			<hash numOwners="2" />
-			<sync />
-		</clustering>
-	</namedCache>
-	 -->
 
 </infinispan>

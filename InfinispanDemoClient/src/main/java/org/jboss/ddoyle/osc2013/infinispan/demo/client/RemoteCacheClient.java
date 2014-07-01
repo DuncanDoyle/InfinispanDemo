@@ -1,11 +1,11 @@
 package org.jboss.ddoyle.osc2013.infinispan.demo.client;
 
 import java.io.Console;
-import java.util.Set;
 import java.util.UUID;
 
 import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
+import org.jboss.ddoyle.osc2013.infinispan.demo.client.listener.EventPrintListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,13 +16,17 @@ public class RemoteCacheClient {
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(RemoteCacheClient.class);
 
-	private RemoteCacheManager cacheManager;
+	//private RemoteCacheManager cacheManager;
+	
+	private RemoteCache<String, String> cache;
 
 	public RemoteCacheClient() {
 		LOGGER.info("Initializing HotRod Cache Manager.");
-		cacheManager = new RemoteCacheManager();
+		RemoteCacheManager cacheManager = new RemoteCacheManager();
+		cache = cacheManager.getCache("MyCoolCache");
+		cache.addClientListener(new EventPrintListener());
 	}
-
+	
 	public static void main(String[] args) {
 		LOGGER.info("Initializing RemoteCacheClient.");
 		RemoteCacheClient client = new RemoteCacheClient();
@@ -53,18 +57,16 @@ public class RemoteCacheClient {
 
 	private void populateCache() {
 		LOGGER.info("Populating cache with random values.");
-		RemoteCache<String, String> remoteCache = cacheManager.getCache("MyCoolCache");
 		int numberOfEntries = 10;
 		for (int counter = 0; counter < numberOfEntries; counter++) {
 			String uuid = UUID.randomUUID().toString();
-			remoteCache.put(uuid, "My data object for uuid: " + uuid);
+			cache.put(uuid, "My data object for uuid: " + uuid);
 		}
 	}
 	
 	private void put(String key, String value) {
 		LOGGER.info("Storing key:value pair '" + key + ":" + value + "' in the cache.");
-		RemoteCache<String, String> remoteCache = cacheManager.getCache("MyCoolCache");
-		remoteCache.put(key, value);
+		cache.put(key, value);
 	}
 
 	/* Does not work in DIST Cache with 'compatibility-mode enabled, See ISPN-3785.

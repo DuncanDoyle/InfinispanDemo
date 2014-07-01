@@ -1,7 +1,6 @@
 package org.jboss.ddoyle.osc2013.infinispan.demo.cache.management;
 
 import java.lang.management.ManagementFactory;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
