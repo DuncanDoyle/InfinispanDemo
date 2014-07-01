@@ -2,22 +2,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jboss.ddoyle.osc2013.infinispan.demo</groupId>
-	<artifactId>InfinispanDemoClient</artifactId>
+	<artifactId>InfinispanDemoDataModel</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<properties>
 		<!-- <infinispan.version>5.2.4.Final-redhat-1</infinispan.version> -->
 		<infinispan.version>7.0.0-SNAPSHOT</infinispan.version>
 	</properties>
 	<dependencies>
-		<!-- Project dependencies -->
-		<dependency>
-			<groupId>org.jboss.ddoyle.osc2013.infinispan.demo</groupId>
-			<artifactId>InfinispanDemoDataModel</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
-	
 		<!-- Import the Infinispan client hotrod -->
+		<!-- 
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-client-hotrod</artifactId>
@@ -48,6 +41,7 @@
 			<version>1.0.13</version>
 			<scope>compile</scope>
 		</dependency>
+		 -->
 	</dependencies>
 	<build>
 		<plugins>
@@ -72,23 +66,6 @@
 						</manifest>
 					</archive>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.2</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<!-- <artifactSet> <excludes> <exclude>classworlds:classworlds</exclude> <exclude>junit:junit</exclude> <exclude>jmock:*</exclude> <exclude>*:xml-apis</exclude> 
-								<exclude>org.apache.maven:lib:tests</exclude> <exclude>log4j:log4j:jar:</exclude> </excludes> </artifactSet> -->
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

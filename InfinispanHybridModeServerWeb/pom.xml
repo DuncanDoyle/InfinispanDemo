@@ -36,6 +36,14 @@
 			<scope>compile</scope>
 		</dependency>
 		 -->
+		 
+		<!-- Project Dependencies -->
+		<dependency>
+		 	<groupId>org.jboss.ddoyle.osc2013.infinispan.demo</groupId>
+		 	<artifactId>InfinispanDemoDataModel</artifactId>
+		 	<version>0.0.2-SNAPSHOT</version>
+		 	<scope>compile</scope>
+		</dependency>
 	
 		<dependency>
 			<groupId>org.infinispan</groupId>

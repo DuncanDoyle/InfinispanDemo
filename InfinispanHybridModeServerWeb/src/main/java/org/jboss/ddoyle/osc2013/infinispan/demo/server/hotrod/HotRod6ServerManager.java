@@ -10,6 +10,7 @@ import org.infinispan.server.core.transport.Transport;
 import org.infinispan.server.hotrod.HotRodServer;
 import org.infinispan.server.hotrod.configuration.HotRodServerConfigurationBuilder;
 import org.jboss.ddoyle.osc2013.infinispan.demo.cache.ApplicationCacheManager;
+import org.jboss.ddoyle.osc2013.infinispan.demo.cache.event.DynamicConverterFactory;
 import org.jboss.ddoyle.osc2013.infinispan.demo.server.ProtocolServerManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,9 +43,8 @@ public class HotRod6ServerManager implements ProtocolServerManager {
 		try {
 			//Configure the configuration builder.
 			HotRodServerConfigurationBuilder builder = new HotRodServerConfigurationBuilder();
-			
 			// Start the connector
-			startProtocolServer(setConnectorProperties(setTopologyStateTransferProperties(builder)).build());
+			startProtocolServer(setConnectorProperties(setConverter(setTopologyStateTransferProperties(builder))).build());
 			
 			LOGGER.info("HotRodServer connector started on host '" + transport.getHostName() + "' and port '" + transport.getPort() + "'.");
 
@@ -96,6 +96,10 @@ public class HotRod6ServerManager implements ProtocolServerManager {
 		//TODO: Configure topology state transfer.
 		//builder.topologyStateTransfer(true);
 		return builder;
+	}
+	
+	private HotRodServerConfigurationBuilder setConverter(HotRodServerConfigurationBuilder builder) {
+		return builder.converterFactory("dynamic-converter", new DynamicConverterFactory());
 	}
 
 	private void startProtocolServer(ProtocolServerConfiguration configuration) {
