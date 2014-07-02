@@ -10,7 +10,7 @@ import org.infinispan.server.core.transport.Transport;
 import org.infinispan.server.hotrod.HotRodServer;
 import org.infinispan.server.hotrod.configuration.HotRodServerConfigurationBuilder;
 import org.jboss.ddoyle.osc2013.infinispan.demo.cache.ApplicationCacheManager;
-import org.jboss.ddoyle.osc2013.infinispan.demo.cache.event.DynamicConverterFactory;
+import org.jboss.ddoyle.osc2013.infinispan.demo.cache.event.StaticConverterFactory;
 import org.jboss.ddoyle.osc2013.infinispan.demo.server.ProtocolServerManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,7 +99,7 @@ public class HotRod6ServerManager implements ProtocolServerManager {
 	}
 	
 	private HotRodServerConfigurationBuilder setConverter(HotRodServerConfigurationBuilder builder) {
-		return builder.converterFactory("dynamic-converter", new DynamicConverterFactory());
+		return builder.converterFactory("static-converter", new StaticConverterFactory());
 	}
 
 	private void startProtocolServer(ProtocolServerConfiguration configuration) {

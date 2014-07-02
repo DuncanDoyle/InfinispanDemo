@@ -11,7 +11,7 @@ import org.jboss.ddoyle.osc2013.infinispan.demo.model.event.CustomEvent;
 
 
 
-@ClientListener(converterFactoryName = "dynamic-converter")
+@ClientListener(converterFactoryName = "static-converter")
 public class CustomEventPrintListener implements Serializable {
 	
 	
@@ -24,7 +24,15 @@ public class CustomEventPrintListener implements Serializable {
 	@ClientCacheEntryModified
 	@ClientCacheEntryRemoved
 	public void handleCreatedEvent(ClientCacheEntryCustomEvent<CustomEvent> e) {
-		System.out.println("Created and Modified: " + e);
+		System.out.println("Created: " + e);
+	}
+	
+	public void handleModifiedEvent(ClientCacheEntryCustomEvent<CustomEvent> e) {
+		System.out.println("Modified: " + e);
+	}
+	
+	public void handleDeletedEvent(ClientCacheEntryCustomEvent<CustomEvent> e) {
+		System.out.println("Deleted: " + e)
 	}
 	
 	/*

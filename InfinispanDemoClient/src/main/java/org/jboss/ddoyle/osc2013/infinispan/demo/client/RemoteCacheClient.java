@@ -54,9 +54,9 @@ public class RemoteCacheClient {
 				String value = System.console().readLine();
 				client.put(key, value);
 			} else if ("addListener".equals(inputString)) {
-				client.addClientListener();
+				client.addClientListener(client.customListener);
 			} else if ("removeListener".equals(inputString)) {
-				client.removeClientListener();
+				client.removeClientListener(client.customListener);
 			} else if ("quit".equals(inputString)) {
 				LOGGER.info("Shutting down RemoteCacheClient.");
 			} else {
@@ -79,16 +79,12 @@ public class RemoteCacheClient {
 		cache.put(key, value);
 	}
 	
-	private void addClientListener() {
-		
-		cache.addClientListener(customListener);
-		
-		//cache.addClientListener(listener);
+	private void addClientListener(Object listener) {
+		cache.addClientListener(listener);
 	}
 	
-	private void removeClientListener() {
-		cache.removeClientListener(customListener);
-		//cache.removeClientListener(listener);
+	private void removeClientListener(Object listener) {
+		cache.removeClientListener(listener);
 	}
 
 	/*
