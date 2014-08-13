@@ -15,5 +15,9 @@ public class CustomEvent implements Serializable {
 		this.key = key;
 		this.value = value;
 	}
+	
+	public String toString() {
+		return new StringBuilder().append("key: ").append(key).append(", value: ").append(value).toString();
+	}
 
 }

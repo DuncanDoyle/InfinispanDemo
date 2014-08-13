@@ -24,12 +24,14 @@
 			<version>${infinispan.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-server-hotrod</artifactId>
 			<version>${infinispan.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>

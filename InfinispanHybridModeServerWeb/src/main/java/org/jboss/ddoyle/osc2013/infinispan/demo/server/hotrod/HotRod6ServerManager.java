@@ -44,7 +44,8 @@ public class HotRod6ServerManager implements ProtocolServerManager {
 			//Configure the configuration builder.
 			HotRodServerConfigurationBuilder builder = new HotRodServerConfigurationBuilder();
 			// Start the connector
-			startProtocolServer(setConnectorProperties(setConverter(setTopologyStateTransferProperties(builder))).build());
+			//startProtocolServer(setConnectorProperties(setConverter(setTopologyStateTransferProperties(builder))).build());
+			startProtocolServer(setConnectorProperties(setTopologyStateTransferProperties(builder)).build());
 			
 			LOGGER.info("HotRodServer connector started on host '" + transport.getHostName() + "' and port '" + transport.getPort() + "'.");
 
@@ -98,9 +99,11 @@ public class HotRod6ServerManager implements ProtocolServerManager {
 		return builder;
 	}
 	
+	/*
 	private HotRodServerConfigurationBuilder setConverter(HotRodServerConfigurationBuilder builder) {
 		return builder.converterFactory("static-converter", new StaticConverterFactory());
 	}
+	*/
 
 	private void startProtocolServer(ProtocolServerConfiguration configuration) {
 		hotRodServer = new HotRodServer();
@@ -109,6 +112,9 @@ public class HotRod6ServerManager implements ProtocolServerManager {
 		LOGGER.info("Starting the HotRodServer connector.");
 		hotRodServer.start(configuration, getCacheManager());
 
+		//Add Converter factories.
+		hotRodServer.addConverterFactory("ddoyle-converter", new StaticConverterFactory());
+		
 		try {
 			//transport = (Transport) ReflectionUtil.getValue(hotRodServer, "transport");
 			transport = hotRodServer.transport();

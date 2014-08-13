@@ -1,6 +1,7 @@
 package org.jboss.ddoyle.osc2013.infinispan.demo.client;
 
 import java.io.Console;
+import java.util.Set;
 import java.util.UUID;
 
 import org.infinispan.client.hotrod.RemoteCache;
@@ -43,6 +44,9 @@ public class RemoteCacheClient {
 			System.out.println("- put (put a key-value pair in the cache)");
 			System.out.println("- addListener (adds a remote listener to the cache.)");
 			System.out.println("- removeListener (adds a remote listener to the cache.)");
+			System.out.println("- addCustomListener (adds a remote listener to the cache.)");
+			System.out.println("- removeCustomListener (adds a remote listener to the cache.)");
+			System.out.println("- keySet (returns the keyset of the cache.)");
 			System.out.println("- quit (exit this application)");
 			inputString = console.readLine();
 			if ("populate".equals(inputString)) {
@@ -54,10 +58,24 @@ public class RemoteCacheClient {
 				String value = System.console().readLine();
 				client.put(key, value);
 			} else if ("addListener".equals(inputString)) {
-				client.addClientListener(client.customListener);
+				client.addClientListener(client.listener);
+				//client.addClientListener(client.customListener);
 			} else if ("removeListener".equals(inputString)) {
+				client.removeClientListener(client.listener);
+				//client.removeClientListener(client.customListener);
+			} else if ("addCustomListener".equals(inputString)) {
+				client.addClientListener(client.customListener);
+				//client.addClientListener(client.customListener);
+			} else if ("removeCustomListener".equals(inputString)) {
 				client.removeClientListener(client.customListener);
-			} else if ("quit".equals(inputString)) {
+				//client.removeClientListener(client.customListener);
+			} else if ("keySet".equals(inputString)) {
+				System.out.println("KeySet: \n");
+				Set keySet = client.getKeySet();
+				for (Object nextKey: keySet) {
+					System.out.println(nextKey + "\n");
+				}
+			}else if ("quit".equals(inputString)) {
 				LOGGER.info("Shutting down RemoteCacheClient.");
 			} else {
 				System.out.println("Unrecognized option: '" + inputString + "'.");
@@ -85,6 +103,10 @@ public class RemoteCacheClient {
 	
 	private void removeClientListener(Object listener) {
 		cache.removeClientListener(listener);
+	}
+	
+	private Set getKeySet() {
+		return cache.keySet();
 	}
 
 	/*
