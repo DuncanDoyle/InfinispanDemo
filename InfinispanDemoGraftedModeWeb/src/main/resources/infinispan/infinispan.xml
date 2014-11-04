@@ -1,0 +1,43 @@
+<infinispan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:infinispan:config:7.0 http://www.infinispan.org/schemas/infinispan-config-7.0.xsd"
+	xmlns="urn:infinispan:config:7.0">
+
+	<jgroups>
+	 
+		<stack-file name="external-file" path="ispn-jgroups-tcp-s3.xml" />
+	<!--  
+	 	<stack-file name="external-file" path="ispn-jgroups-tcp.xml" />
+	-->
+	</jgroups>
+
+
+
+	<cache-container default-cache="CacheContainer" statistics="true">
+		<transport stack="external-file" site="${ispn.site}" />
+
+		<serialization></serialization>
+		<jmx></jmx>
+		<distributed-cache name="MyCoolCache" owners="2" mode="SYNC">
+			<eviction max-entries="10000" />
+			<!-- 
+			<compatibility />
+			-->
+			<data-container key-equivalence="org.jboss.ddoyle.infinispan.demo.cache.equivalence.AnyServerEquivalence"/>
+			 
+			<backups>
+			<!-- 
+				<backup site="${ispn.backup.1.site}" failure-policy="${ispn.backup.1.site.failure-policy}" strategy="${ispn.backup.1.site.strategy}" timeout="${ispn.backup.1.site.timeout}" enabled="${ispn.backup.1.enabled}" />
+			-->
+			  
+			 	<backup site="${ispn.backup.1.site}" failure-policy="CUSTOM" failure-policy-class="org.jboss.ddoyle.infinispan.demo.xsite.SimpleXSiteFailurePolicy" strategy="${ispn.backup.1.site.strategy}" timeout="${ispn.backup.1.site.timeout}" enabled="${ispn.backup.1.enabled}" />
+			 
+				<!-- 
+				<backup site="SFO" failure-policy="IGNORE" strategy="ASYNC" /> 
+				<backup site="LON" strategy="SYNC" enabled="false" /> </backups>
+				-->
+			</backups>
+		</distributed-cache>
+
+	</cache-container>
+
+</infinispan>
